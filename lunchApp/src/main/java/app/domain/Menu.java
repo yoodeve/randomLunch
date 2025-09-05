@@ -1,6 +1,4 @@
 package app.domain;
 
-
-class RoomList {
-
+public class Menu {
 }
