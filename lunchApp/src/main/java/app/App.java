@@ -1,6 +1,7 @@
 package app;
 
 import app.domain.Room;
+import app.service.MenuService;
 import app.service.RoomService;
 
 import java.util.Scanner;
@@ -9,6 +10,7 @@ public class App {
 
     public static void main(String[] args) {
         RoomService rs = new RoomService();
+        MenuService ms = new MenuService();
 
         try(Scanner sc = new Scanner(System.in)){
             System.out.print("1. 회원가입    2. 로그인    3. 나가기");
@@ -17,7 +19,11 @@ public class App {
             switch(selectNum){
                 case "1": break; // 각자
                 case "2":
-                    rs.makeRoomList(rs.askRoomInfo(sc));
+                    Room r = rs.askRoomInfo(sc);
+                    rs.makeRoomList(r);
+
+                    ms.makeMenu(r.getRoomName(), sc);
+
                     break; // 각자
                 case "3": break; // 각자
                 default: break; // 각자

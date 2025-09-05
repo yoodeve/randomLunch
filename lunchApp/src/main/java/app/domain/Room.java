@@ -25,4 +25,44 @@ public class Room {
                 ", selectedMenu='" + selectedMenu + '\'' +
                 '}';
     }
+
+    public String getSelectedMenu() {
+        return selectedMenu;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public String getParticipantCount() {
+        return participantCount;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public void setParticipantCount(String participantCount) {
+        this.participantCount = participantCount;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setSelectedMenu(String selectedMenu) {
+        this.selectedMenu = selectedMenu;
+    }
 }
