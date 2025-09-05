@@ -3,6 +3,7 @@ package app.domain;
 import java.time.LocalDateTime;
 
 public class Menu {
+    // 주석 테스트
     private String roomName;
     private String menuName;
     private LocalDateTime createdAt;
