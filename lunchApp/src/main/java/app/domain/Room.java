@@ -2,12 +2,12 @@ package app.domain;
 
 public class Room {
     private String roomName;
-    private String participantCount;
+    int participantCount;
     private String ownerName;
     private int totalPrice;
     private String selectedMenu;
 
-    public Room(String roomName, String participantCount, String ownerName, int totalPrice, String selectedMenu) {
+    public Room(String roomName, int participantCount, String ownerName, int totalPrice, String selectedMenu) {
         this.roomName = roomName;
         this.participantCount = participantCount;
         this.ownerName = ownerName;
@@ -38,7 +38,7 @@ public class Room {
         return ownerName;
     }
 
-    public String getParticipantCount() {
+    public int getParticipantCount() {
         return participantCount;
     }
 
@@ -50,7 +50,7 @@ public class Room {
         this.roomName = roomName;
     }
 
-    public void setParticipantCount(String participantCount) {
+    public void setParticipantCount(int participantCount) {
         this.participantCount = participantCount;
     }
 

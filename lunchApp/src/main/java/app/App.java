@@ -4,6 +4,7 @@ import app.domain.Room;
 import app.service.MenuService;
 import app.service.RoomService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -17,16 +18,16 @@ public class App {
             System.out.print("번호 입력   ==>>>  ");
             String selectNum = sc.nextLine();
             switch(selectNum){
-                case "1": break; // 각자
+                case "1": break;
                 case "2":
                     Room r = rs.askRoomInfo(sc);
                     rs.makeRoomList(r);
-
-                    ms.makeMenu(r.getRoomName(), sc);
-
-                    break; // 각자
-                case "3": break; // 각자
-                default: break; // 각자
+                    for(int i = 0 ; i < r.getParticipantCount(); i ++) {
+                        ms.makeMenu(i, r, sc);
+                    }
+                    break;
+                case "3": break;
+                default: break;
             }
         }catch(Exception e){
             e.printStackTrace();
