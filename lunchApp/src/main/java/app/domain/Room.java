@@ -1,19 +1,28 @@
 package app.domain;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class Room {
-    private static String roomName;
-    private static int participantCount;
-    private static String ownerName;
-    private static Date createdAt;
+    private String roomName;
+    private String participantCount;
+    private String ownerName;
+    private int totalPrice;
+    private String selectedMenu;
 
-    Room (String roomName, int participantCount,String ownerName,String electedMenu) {
+    public Room(String roomName, String participantCount, String ownerName, int totalPrice, String selectedMenu) {
         this.roomName = roomName;
         this.participantCount = participantCount;
         this.ownerName = ownerName;
-        this.createdAt = new Date();
+        this.totalPrice = totalPrice;
+        this.selectedMenu = selectedMenu;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomName='" + roomName + '\'' +
+                ", participantCount='" + participantCount + '\'' +
+                ", ownerName='" + ownerName + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", selectedMenu='" + selectedMenu + '\'' +
+                '}';
     }
 }
