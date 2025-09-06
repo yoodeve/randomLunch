@@ -6,15 +6,12 @@ import app.domain.MenuWinsComparator;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class MenuRepository {
     // RoomRepository class 주석 참고
     private final String fileName = "Menu.txt";
-    private static final List<Menu> defaultMenus = List.of(new Menu("짜장면"), new Menu("짬뽕"), new Menu("탕수육"));
+    private static final List<Menu> defaultMenus = new ArrayList<>(Arrays.asList(new Menu("짜장면"), new Menu("짬뽕"), new Menu("탕수육")));
     private FileInputStream fis;
     private BufferedInputStream bis;
     private ObjectInputStream ois;
@@ -27,7 +24,8 @@ public class MenuRepository {
         List<Menu> menus = new ArrayList<>();
 
         if (isEmpty()) {
-            saveMenus(defaultMenus);
+
+            saveMenus(new ArrayList<>(defaultMenus));
         }
         try {
             fis = new FileInputStream(fileName);
