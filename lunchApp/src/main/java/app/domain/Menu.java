@@ -3,14 +3,12 @@ package app.domain;
 import java.time.LocalDateTime;
 
 public class Menu {
-    private String roomName;
-    private String menuName;
+    private String name;
     private LocalDateTime createdAt;
     private int votes;
 
-    public Menu(String roomName, String menuName) {
-        this.roomName = roomName;
-        this.menuName = menuName;
+    public Menu(String roomName, String name) {
+        this.name = name;
         this.createdAt = LocalDateTime.now();
         this.votes = 0;
     }
@@ -19,12 +17,8 @@ public class Menu {
         this.votes++;
     }
 
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public String getMenuName() {
-        return menuName;
+    public String getName() {
+        return name;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -38,10 +32,9 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu{" +
-                "roomName='" + roomName + '\'' +
-                ", menuName='" + menuName + '\'' +
-                ", createdAt=" + createdAt +
-                ", votes=" + votes +
+                "name= \'" + name + "\'" +
+                ", createdAt= \'" + createdAt + "\'" +
+                ", votes= \'" + votes + "\'" +
                 '}';
     }
 }
