@@ -1,13 +1,14 @@
 package app.repository;
 
 import app.domain.Menu;
+import app.domain.MenuWinsComparator;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MenuRepository {
@@ -16,23 +17,57 @@ public class MenuRepository {
     private static final List<Menu> defaultMenus = List.of(new Menu("짜장면"), new Menu("짬뽕"), new Menu("탕수육"));
     private FileInputStream fis;
     private BufferedInputStream bis;
-    private ObjectInputStream in;
+    private ObjectInputStream ois;
+    private FileOutputStream fos;
+    private BufferedOutputStream bos;
+    private ObjectOutputStream oos;
 
     public List<Menu> loadMenus() {
 
         List<Menu> menus = new ArrayList<>();
+
+        if (isEmpty()) {
+            saveMenus(defaultMenus);
+        }
         try {
             fis = new FileInputStream(fileName);
             bis = new BufferedInputStream(fis);
-            in = new ObjectInputStream(bis);
+            ois = new ObjectInputStream(bis);
 
-            menus = (List<Menu>) in.readObject();
-            in.close();
+            menus = (List<Menu>) ois.readObject();
+            ois.close();
             bis.close();
             fis.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return menus;
+    }
+
+    public void saveMenus(List<Menu> menus) {
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            oos = new ObjectOutputStream(bos);
+
+            List<Menu> reorderedMenus = reorderMenus(menus);
+            oos.writeObject(reorderedMenus);
+
+            oos.close();
+            bos.close();
+            fos.close();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private boolean isEmpty() {
+        File f = new File(fileName);
+        return (f.length() == 0);
+    }
+
+    private List<Menu> reorderMenus(List<Menu> menus) {
+        Collections.sort(menus, new MenuWinsComparator());
         return menus;
     }
 
