@@ -1,11 +1,13 @@
 package app;
 
+import app.domain.Menu;
 import app.domain.Room;
 import app.service.MenuService;
 import app.service.RoomService;
 
+import java.util.*;
+import java.util.List;
 import java.util.Scanner;
-
 public class App {
 
     public static void main(String[] args) {
@@ -17,20 +19,51 @@ public class App {
             System.out.print("번호 입력   ==>>>  ");
             String selectNum = sc.nextLine();
             switch(selectNum){
-                case "1": break; // 각자
+                case "1": break;
                 case "2":
                     Room r = rs.askRoomInfo(sc);
+                    Map<String, Integer> tempMap;
+
                     rs.makeRoomList(r);
+                    System.out.println("드시고싶은게 있으면 1번, 랜덤으로 뽑으려면 2번");
+                    String subMenuNum = sc.nextLine();
+                    switch (subMenuNum) {
+                        case "1" :
+                            tempMap = ms.randomMenu(ms.getMenuList());
+                            break;
+                        default:
+                            tempMap = ms.electMenu(sc, r);
+                    }
 
-                    ms.makeMenu(r.getRoomName(), sc);
 
-                    break; // 각자
-                case "3": break; // 각자
-                default: break; // 각자
+                    for(int i = 0 ; i < r.getParticipantCount(); i ++) {
+                        ms.makeMenu(i, sc);
+                    }
+
+
+
+                    var iter = tempMap.entrySet().iterator();
+                    var first = iter.next();
+                    String maxKey = first.getKey();
+                    int maxValue = first.getValue();
+
+                    while (iter.hasNext()) {
+                        var e = iter.next();
+                        if (e.getValue() > maxValue) {
+                            maxValue = e.getValue();
+                            maxKey = e.getKey();
+                        }
+                    }
+                    r.setSelectedMenu(maxKey);
+                    for(int i = 0 ; i < r.getParticipantCount(); i ++) {
+                        ms.makeMenu(i, sc);
+                    }
+                    break;
+                case "3": break;
+                default: break;
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 }
