@@ -1,13 +1,14 @@
 package app.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Menu {
+public class Menu implements Serializable {
     private String name;
     private LocalDateTime createdAt;
     private int votes;
 
-    public Menu(String roomName, String name) {
+    public Menu(String name) {
         this.name = name;
         this.createdAt = LocalDateTime.now();
         this.votes = 0;
