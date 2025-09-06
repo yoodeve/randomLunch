@@ -22,17 +22,25 @@ public class App {
                 case "1": break;
                 case "2":
                     Room r = rs.askRoomInfo(sc);
+                    Map<String, Integer> tempMap;
+
                     rs.makeRoomList(r);
-                    Map<String, Integer> tempMap = new HashMap<>();
+                    System.out.println("드시고싶은게 있으면 1번, 랜덤으로 뽑으려면 2번");
+                    String subMenuNum = sc.nextLine();
+                    switch (subMenuNum) {
+                        case "1" :
+                            tempMap = ms.randomMenu(ms.getMenuList());
+                            break;
+                        default:
+                            tempMap = ms.electMenu(sc, r);
+                    }
+
+
                     for(int i = 0 ; i < r.getParticipantCount(); i ++) {
                         ms.makeMenu(i, sc);
                     }
-//                    String subMenuNum = sc.nextLine();
-//                    switch (subMenuNum) {
-//                        case "1" :
-//                            tempMap = ms.
-//                    }
-                    tempMap = ms.electMenu(sc, r);
+
+
 
                     var iter = tempMap.entrySet().iterator();
                     var first = iter.next();

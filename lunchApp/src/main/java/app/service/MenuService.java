@@ -4,21 +4,12 @@ import app.domain.Room;
 
 import java.util.HashMap;
 import java.util.Map;
-import app.domain.Menu;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuService {
     String menuName;
     Map<String, Integer> menuList = new HashMap<>();
-
-    @Override
-    public String toString() {
-        return "MenuService{" +
-                "menuList=" + menuList +
-                '}';
-    }
 
     public String makeMenu(int i, Scanner sc) {
         System.out.print((i + 1) + "번째 친구가 먹고싶은 메뉴를 입력해주세요.==>");
@@ -42,5 +33,37 @@ public class MenuService {
        menuList.put(selectedMenu, menuList.get(selectedMenu) + 1);
        return menuList;
    }
-   
+
+    public Map<String, Integer> randomMenu (Map<String, Integer> menuList) {
+//        if(menuList.size() < 5) {
+//            System.out.println("당신네는 아직 때가 아닙니다");
+//        }
+        int randomMenuIndex = (int)(Math.random() * menuList.size()) + 1;
+        System.out.println("randomMenuIndex"+ randomMenuIndex);
+//        return menuList.get(randomMenuIndex);
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "MenuService{" +
+                "menuList=" + menuList +
+                '}';
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    public Map<String, Integer> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(Map<String, Integer> menuList) {
+        this.menuList = menuList;
+    }
 }
