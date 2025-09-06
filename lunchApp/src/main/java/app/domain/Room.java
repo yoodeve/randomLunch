@@ -63,6 +63,7 @@ public class Room {
     }
 
     public void setSelectedMenu(String selectedMenu) {
+        System.out.println("선정된 메뉴는 '"+selectedMenu+"' 입니다");
         this.selectedMenu = selectedMenu;
     }
 }

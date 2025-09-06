@@ -1,12 +1,13 @@
 package app;
 
+import app.domain.Menu;
 import app.domain.Room;
 import app.service.MenuService;
 import app.service.RoomService;
 
+import java.util.*;
 import java.util.List;
 import java.util.Scanner;
-
 public class App {
 
     public static void main(String[] args) {
@@ -22,8 +23,32 @@ public class App {
                 case "2":
                     Room r = rs.askRoomInfo(sc);
                     rs.makeRoomList(r);
+                    Map<String, Integer> tempMap = new HashMap<>();
                     for(int i = 0 ; i < r.getParticipantCount(); i ++) {
-                        ms.makeMenu(i, r, sc);
+                        ms.makeMenu(i, sc);
+                    }
+//                    String subMenuNum = sc.nextLine();
+//                    switch (subMenuNum) {
+//                        case "1" :
+//                            tempMap = ms.
+//                    }
+                    tempMap = ms.electMenu(sc, r);
+
+                    var iter = tempMap.entrySet().iterator();
+                    var first = iter.next();
+                    String maxKey = first.getKey();
+                    int maxValue = first.getValue();
+
+                    while (iter.hasNext()) {
+                        var e = iter.next();
+                        if (e.getValue() > maxValue) {
+                            maxValue = e.getValue();
+                            maxKey = e.getKey();
+                        }
+                    }
+                    r.setSelectedMenu(maxKey);
+                    for(int i = 0 ; i < r.getParticipantCount(); i ++) {
+                        ms.makeMenu(i, sc);
                     }
                     break;
                 case "3": break;
@@ -32,6 +57,5 @@ public class App {
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 }
