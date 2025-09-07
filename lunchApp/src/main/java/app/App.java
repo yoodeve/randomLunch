@@ -32,16 +32,11 @@ public class App {
                             tempMap = ms.randomMenu(ms.getMenuList());
                             break;
                         default:
+                            for(int i = 0 ; i < r.getParticipantCount(); i ++) {
+                                ms.makeMenu(i, sc);
+                            }
                             tempMap = ms.electMenu(sc, r);
                     }
-
-
-                    for(int i = 0 ; i < r.getParticipantCount(); i ++) {
-                        ms.makeMenu(i, sc);
-                    }
-
-
-
                     var iter = tempMap.entrySet().iterator();
                     var first = iter.next();
                     String maxKey = first.getKey();
