@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 public class App {
 
+    /*
+    @todo
+    왜 내코드는 잘 뜯어고쳐놓고 App.java는 손도 안댔는지...?
+     */
     public static void main(String[] args) {
         RoomService rs = new RoomService();
         MenuService ms = new MenuService();
