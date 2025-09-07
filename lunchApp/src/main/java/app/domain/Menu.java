@@ -1,47 +1,41 @@
 package app.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Menu {
-    private String roomName;
-    private String menuName;
+public class Menu implements Serializable {
+    private String name;
     private LocalDateTime createdAt;
-    private int votes;
+    private int wins;
 
-    public Menu(String roomName, String menuName) {
-        this.roomName = roomName;
-        this.menuName = menuName;
+    public Menu(String name) {
+        this.name = name;
         this.createdAt = LocalDateTime.now();
-        this.votes = 0;
+        this.wins = 0;
     }
 
-    public void addVote() {
-        this.votes++;
+    public void addWins() {
+        this.wins++;
     }
 
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public String getMenuName() {
-        return menuName;
+    public String getName() {
+        return name;
     }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public int getVotes() {
-        return votes;
+    public int getWins() {
+        return wins;
     }
 
     @Override
     public String toString() {
         return "Menu{" +
-                "roomName='" + roomName + '\'' +
-                ", menuName='" + menuName + '\'' +
-                ", createdAt=" + createdAt +
-                ", votes=" + votes +
+                "name= \'" + name + "\'" +
+                ", createdAt= \'" + createdAt + "\'" +
+                ", wins= \'" + wins + "\'" +
                 '}';
     }
 }
