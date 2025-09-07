@@ -3,6 +3,7 @@ package app.service;
 import app.domain.Room;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import java.util.Scanner;
@@ -34,10 +35,7 @@ public class MenuService {
        return menuList;
    }
 
-    public Map<String, Integer> randomMenu (Map<String, Integer> menuList) {
-//        if(menuList.size() < 5) {
-//            System.out.println("당신네는 아직 때가 아닙니다");
-//        }
+    public Map<String, Integer> randomMenu (Map<String, Integer> menuList, List<Room> roomList) {
         int randomMenuIndex = (int)(Math.random() * menuList.size()) + 1;
         System.out.println("randomMenuIndex"+ randomMenuIndex);
 //        return menuList.get(randomMenuIndex);

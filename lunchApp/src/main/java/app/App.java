@@ -22,14 +22,19 @@ public class App {
                 case "1": break;
                 case "2":
                     Room r = rs.askRoomInfo(sc);
-                    Map<String, Integer> tempMap;
+                    Map<String, Integer> tempMap = new HashMap<>();
 
-                    rs.makeRoomList(r);
+                    List<Room> roomList = rs.makeRoomList(r);
                     System.out.println("드시고싶은게 있으면 1번, 랜덤으로 뽑으려면 2번");
                     String subMenuNum = sc.nextLine();
                     switch (subMenuNum) {
                         case "1" :
-                            tempMap = ms.randomMenu(ms.getMenuList());
+                            System.out.println(roomList.size());
+                            if(roomList.size() < 5) {
+                                System.out.println("당신네는 아직 때가 아닙니다");
+                                break;
+                            }
+                            tempMap = ms.randomMenu(ms.getMenuList(), rs.makeRoomList(r));
                             break;
                         default:
                             for(int i = 0 ; i < r.getParticipantCount(); i ++) {
