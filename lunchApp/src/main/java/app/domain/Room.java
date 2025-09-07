@@ -15,6 +15,11 @@ public class Room {
         this.selectedMenu = selectedMenu;
     }
 
+    public void setSelectedMenu(String selectedMenu) {
+        System.out.println("선정된 메뉴는 '"+selectedMenu+"' 입니다");
+        this.selectedMenu = selectedMenu;
+    }
+
     @Override
     public String toString() {
         return "Room{" +
@@ -62,8 +67,4 @@ public class Room {
         this.totalPrice = totalPrice;
     }
 
-    public void setSelectedMenu(String selectedMenu) {
-        System.out.println("선정된 메뉴는 '"+selectedMenu+"' 입니다");
-        this.selectedMenu = selectedMenu;
-    }
 }

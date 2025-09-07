@@ -25,15 +25,20 @@ public class App {
                     Map<String, Integer> tempMap = new HashMap<>();
 
                     List<Room> roomList = rs.makeRoomList(r);
-                    System.out.println("드시고싶은게 있으면 1번, 랜덤으로 뽑으려면 2번");
+                    System.out.println("랜덤으로 뽑으려면 1번, 투표하시려면 2번");
                     String subMenuNum = sc.nextLine();
                     switch (subMenuNum) {
                         case "1" :
-                            System.out.println(roomList.size());
-                            if(roomList.size() < 5) {
+                        try {
+                            if (roomList.size() < 5) {
                                 System.out.println("당신네는 아직 때가 아닙니다");
                                 break;
                             }
+                        } catch (NoSuchElementException e) {
+                            e.printStackTrace();
+                        } finally {
+//                            continue;
+                        }
                             tempMap = ms.randomMenu(ms.getMenuList(), rs.makeRoomList(r));
                             break;
                         default:
