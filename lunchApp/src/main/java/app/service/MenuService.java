@@ -6,16 +6,23 @@ import app.repository.MenuRepository;
 import java.util.*;
 
 public class MenuService {
+    // 변수명 수정..?넘늦었나?
     int numOfUsers;
     Map<String, Integer> menuList = new HashMap<>();
     MenuRepository menuRepository = new MenuRepository();
+
+    // 이런건 위로 뺍시다?
+    public MenuService(int numOfUsers) {
+        this.numOfUsers = numOfUsers;
+    }
+
 
     public void proceedVote(Scanner sc) {
         for (int i = 0; i < numOfUsers; i++) {
             voteMenu(i, sc);
         }
     }
-
+    //왜 private이죠?
     private void voteMenu(int i, Scanner sc) {
         System.out.print((i + 1) + "번째 친구가 먹고싶은 메뉴를 투표해주세요.==>");
         String wantedMenu = sc.nextLine();
@@ -69,7 +76,6 @@ public class MenuService {
         this.menuRepository.saveMenus(loadedMenuList);
    }
 
-   /*
     public Map<String, Integer> randomMenu () {
 //        if(menuList.size() < 5) {
 //            System.out.println("당신네는 아직 때가 아닙니다");
@@ -79,7 +85,6 @@ public class MenuService {
 //        return menuList.get(randomMenuIndex);
         return null;
     }
-    */
 
     @Override
     public String toString() {
@@ -88,7 +93,27 @@ public class MenuService {
                 '}';
     }
 
-    public MenuService(int numOfUsers) {
+    public int getNumOfUsers() {
+        return numOfUsers;
+    }
+
+    public void setNumOfUsers(int numOfUsers) {
         this.numOfUsers = numOfUsers;
+    }
+
+    public Map<String, Integer> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(Map<String, Integer> menuList) {
+        this.menuList = menuList;
+    }
+
+    public MenuRepository getMenuRepository() {
+        return menuRepository;
+    }
+
+    public void setMenuRepository(MenuRepository menuRepository) {
+        this.menuRepository = menuRepository;
     }
 }

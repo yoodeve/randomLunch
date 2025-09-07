@@ -12,6 +12,7 @@ public class App {
 
     public static void main(String[] args) {
         RoomService rs = new RoomService();
+        // 생성자에 왜 안넣어주죠..?제가다고쳐야하나요...?
         MenuService ms = new MenuService();
 
         try(Scanner sc = new Scanner(System.in)){
@@ -29,9 +30,10 @@ public class App {
                     String subMenuNum = sc.nextLine();
                     switch (subMenuNum) {
                         case "1" :
-                            tempMap = ms.randomMenu(ms.getMenuList());
+                            tempMap = ms.randomMenu();
                             break;
                         default:
+                            // 왜 안고치셨죠..?
                             tempMap = ms.electMenu(sc, r);
                     }
 
