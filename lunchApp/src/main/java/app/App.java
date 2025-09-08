@@ -1,8 +1,5 @@
 package app;
 
-import app.domain.Room;
-import app.service.MenuService;
-import app.service.RoomService;
 import app.service.UserManagementSystem;
 
 import java.util.Scanner;

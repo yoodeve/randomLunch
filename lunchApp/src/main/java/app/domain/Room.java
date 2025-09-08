@@ -1,8 +1,12 @@
 package app.domain;
 
+import app.commons.DateAt;
 import app.service.MenuService;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room extends DateAt implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String roomName;
     int participantCount;
     private String ownerName;

@@ -13,7 +13,7 @@ import java.util.*;
 // MenuRepository class의 메서드들을 사용하여 "Menu.txt" 파일에 저장되어 있는 데이터를
 // MenuRepository 객체가 instance variable로 가지고 있는 InputStream들과 OutputStream들을 통해 읽고, 덮어쓴다.
 public class MenuRepository {
-    private final String fileName = "Menu.txt"; // Menu 객체들을 ArrayList로 저장하고 있는 .txt
+    private final String fileName = "src/main/java/data/Menu.txt"; // Menu 객체들을 ArrayList로 저장하고 있는 .txt
     private static final List<Menu> defaultMenus = new ArrayList<>(Arrays.asList(new Menu("짜장면"), new Menu("짬뽕"), new Menu("탕수육"))); // default Menu 객체 ArrayList
     private FileInputStream fis;
     private BufferedInputStream bis;
@@ -24,7 +24,6 @@ public class MenuRepository {
 
     //"Menu.txt"에 저장되어 있는 ArrayList<Menu>를 불러와 반환하는 메서드 
     public List<Menu> loadMenus() {
-
         List<Menu> menus = new ArrayList<>();
 
         if (isEmpty()) {
@@ -76,13 +75,13 @@ public class MenuRepository {
             }
         }
     }
-    
+
     //.txt파일의 내용이 비어있는지 확인하는 helper 메서드
     private boolean isEmpty() {
         File f = new File(fileName);
         return (f.length() == 0);
     }
-    
+
     //Menu 객체의 우승 횟수가 lowest to highest 순으로 재배열 된다.
     private List<Menu> reorderMenus(List<Menu> menus) {
         Collections.sort(menus, new MenuWinsComparator());
