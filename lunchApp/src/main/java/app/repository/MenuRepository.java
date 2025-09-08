@@ -37,11 +37,17 @@ public class MenuRepository {
             ois = new ObjectInputStream(bis);
             //객체 역직렬화
             menus = (List<Menu>) ois.readObject();
-            ois.close();
-            bis.close();
-            fis.close();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally{
+            try {
+                ois.close();
+                bis.close();
+                fis.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return menus;
     }
@@ -57,11 +63,17 @@ public class MenuRepository {
             List<Menu> reorderedMenus = reorderMenus(menus);
             oos.writeObject(reorderedMenus);
 
-            oos.close();
-            bos.close();
-            fos.close();
+
         } catch (Exception e){
             System.out.println(e.getMessage());
+        } finally{
+            try {
+                oos.close();
+                bos.close();
+                fos.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     

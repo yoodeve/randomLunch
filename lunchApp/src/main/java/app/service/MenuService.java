@@ -63,6 +63,7 @@ public class MenuService {
    public String getWinner(Scanner sc) {
         List<String> Winners = getAllWinners();
         if (Winners.size() > 1) {
+            System.out.println("어라..?");
             menuList.clear();
             proceedVote(sc);
             return getWinner(sc);
@@ -96,6 +97,10 @@ public class MenuService {
         return count;
    }
 
+   public String randomMenu(){
+        List<String> menuArrayList = new ArrayList<>(this.menuList.keySet());
+        return menuArrayList.get((int)(Math.random() * menuArrayList.size()));
+   }
    public String randomFromTopList() {
         if (getInitiatedTimes() < 5) {
             System.out.println("아직 충분히 데이터가 모이지 않았습니다.");
@@ -107,9 +112,7 @@ public class MenuService {
         topList.add(loadedMenuList.get(topListedMenuIndex--).getName());
         topList.add(loadedMenuList.get(topListedMenuIndex).getName()); // 현재는 2개지만 추후에 10개로 업데이트 예정
 
-        Random rand = new Random();
-
-        return topList.get(rand.nextInt(topList.size()));
+        return topList.get((int)(Math.random() * topList.size()));
    }
 
 
