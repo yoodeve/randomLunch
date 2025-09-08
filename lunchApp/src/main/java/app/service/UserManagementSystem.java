@@ -298,23 +298,7 @@ public class UserManagementSystem {
                     break;
                 case "2":
                     User loggedInUser = login();
-                    String subMenuNumber = sc.nextLine().trim();
-                    System.out.println("1. 방만들기  2. 마이페이지");
-                        switch (subMenuNumber) {
-                            case "1":
-                                if (loggedInUser != null) {
-                                    userManagementSystem.showMainMenu(sc);
-                                    // 방정보 묻는 로직
-                                    Room room = roomService.askRoomInfo(sc);
-                                    MenuService menuService = new MenuService(room.getParticipantCount());
-                                    menuService.proceedVote(sc);
-                                    String winner = menuService.getWinner(sc);
-                                    menuService.updateWinner(winner);
-                                    room.setSelectedMenu(winner);
-                                }
-                            case "2":
-                                System.out.println("마이페이지");
-                        }
+                    showLoggedUserMenu(sc);
                     break;
                 case "3":
                     showAllUsers();
@@ -326,6 +310,65 @@ public class UserManagementSystem {
                 default:
                     System.out.println("올바른 메뉴를 선택해주세요.");
             }
+        }
+    }
+
+    public void showLoggedUserMenu(Scanner sc) {
+        System.out.println("\n=== 유저 메뉴 시스템 ===");
+        System.out.println("1. 방 생성하기");
+        System.out.println("2. 마이페이지 조회하기");
+        System.out.print("메뉴를 선택하세요: ");
+        String choice = sc.nextLine().trim();
+
+        switch (choice) {
+            case "1":
+                Room room = RoomService.askRoomInfo(sc);
+                showMenuService(room, sc);
+
+                break;
+            case "2":
+                System.out.println("마이페이지 조회");
+                break;
+            default:
+                System.out.println("올바른 메뉴를 선택해주세요.");
+
+
+        }
+
+    }
+
+    public void showMenuService(Room room, Scanner sc) {
+        System.out.println("\n=== 메뉴 선택 시스템 ===");
+        System.out.println("1. 최다 득표 메뉴로 정하기");
+        System.out.println("2. 투표받은 메뉴 랜덤 돌리기");
+        System.out.println("3. Top 10 메뉴 리스트 랜덤 돌리기");
+        System.out.print("옵션을 선택하세요: ");
+        String choice = sc.nextLine().trim();
+
+        MenuService menuService = new MenuService(room.getParticipantCount());
+
+        switch (choice) {
+            case "1":
+                menuService.proceedVote(sc);
+                String winner = menuService.getWinner(sc);
+                menuService.updateWinner(winner);
+                room.setSelectedMenu(winner);
+                System.out.println("이 방이 선택한 음식은: " + room.getSelectedMenu());
+                break;
+
+            case "2":
+                room.setSelectedMenu(menuService.randomMenu(sc));
+                System.out.println("이 방이 선택한 음식은: " + room.getSelectedMenu());
+                break;
+
+            case "3":
+                room.setSelectedMenu(menuService.randomFromTopList());
+                System.out.println("이 방이 선택한 음식은: " + room.getSelectedMenu());
+                break;
+
+            default:
+                System.out.println("없는 옵션입니다.");
+
         }
     }
 
