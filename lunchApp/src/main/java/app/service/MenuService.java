@@ -1,6 +1,7 @@
 package app.service;
 
 import app.domain.Menu;
+import app.domain.User;
 import app.repository.MenuRepository;
 
 import java.util.*;
@@ -9,13 +10,15 @@ import java.util.*;
 // 각 Room 객체는 instance variable로 MenuService 객체(의 주소)를 가지고 있다.
 public class MenuService {
     int numOfUsers; // 방 인원수
+    User user;
     Map<String, Integer> menuList = new HashMap<>(); // 해당 방의 투표들을 메뉴이름(String) 별로 저장하기 위한 HashMap
     MenuRepository menuRepository = new MenuRepository(); // "Menu.txt" 파일 사용하기 위해
 
     // default 생성자 호출을 제어하고 해당 클래스의 객체를 생성할 때,
     // 방의 인원 수를 parameter로 넣는 것을 강제시키기 위해 해당 생성자를 정의한다.
-    public MenuService(int numOfUsers) {
+    public MenuService(int numOfUsers, User user) {
         this.numOfUsers = numOfUsers;
+        this.user = user;
     }
 
     // 방 인원 수 만큼 voteMenu() 함수를 진행시킨다.
@@ -73,7 +76,7 @@ public class MenuService {
    public String getWinner(Scanner sc) {
         List<String> Winners = getAllWinners();
         if (Winners.size() > 1) {
-            System.out.println("어라..?");
+            System.out.println("중복된 메뉴입니다. 다시!");
             menuList.clear();
             proceedVote(sc);
             return getWinner(sc);
@@ -125,19 +128,6 @@ public class MenuService {
 
         return topList.get((int)(Math.random() * topList.size()));
    }
-
-
-   /*
-    public Map<String, Integer> randomMenu () {
-//        if(menuList.size() < 5) {
-//            System.out.println("당신네는 아직 때가 아닙니다");
-//        }
-        int randomMenuIndex = (int)(Math.random() * this.menuList.size()) + 1;
-        System.out.println("randomMenuIndex"+ randomMenuIndex);
-//        return menuList.get(randomMenuIndex);
-        return null;
-    }
-    */
 
     @Override
     public String toString() {

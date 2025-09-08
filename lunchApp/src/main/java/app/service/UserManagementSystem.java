@@ -48,8 +48,8 @@ public class UserManagementSystem {
     }
 
     //회원가입 기능
-    public void registerUser() {
-        System.out.println("\n=== 회원가입 ===");
+    public User registerUser() {
+        System.out.println("=== 회원가입 ===");
 
         // 이름 입력 및 검증
         String name = getValidName();
@@ -73,8 +73,9 @@ public class UserManagementSystem {
         // 비밀번호 암호화 저장
         passwordStorage.savePassword(id, password);
 
-        System.out.println("\n회원가입이 완료되었습니다!");
-        System.out.println("등록된 회원 정보: " + newUser.toString());
+        System.out.println("회원가입이 완료되었습니다!");
+        System.out.println("등록된 회원 정보: " + newUser);
+        return newUser;
     }
 
     /**
@@ -194,7 +195,7 @@ public class UserManagementSystem {
      * @return 로그인 성공 시 User 객체, 실패 시 null
      */
     public User login() {
-        System.out.println("\n=== 로그인 ===");
+        System.out.println("=== 로그인 ===");
 
         String id = getLoginId();
         String password = getLoginPassword();
@@ -202,7 +203,7 @@ public class UserManagementSystem {
         // 사용자 찾기 및 비밀번호 검증
         for (User user : users) {
             if (user.getId().equals(id) && passwordStorage.verifyPassword(id, password)) {
-                System.out.println("\n로그인 성공!");
+                System.out.println("로그인 성공!");
                 System.out.println("환영합니다, " + user.getName() + "님!");
                 return user;
             }
@@ -264,7 +265,7 @@ public class UserManagementSystem {
      * 등록된 모든 사용자 조회
      */
     public void showAllUsers() {
-        System.out.println("\n=== 등록된 회원 목록 ===");
+        System.out.println("=== 등록된 회원 목록 ===");
         if (users.isEmpty()) {
             System.out.println("등록된 회원이 없습니다.");
             return;
@@ -274,16 +275,47 @@ public class UserManagementSystem {
             User user = users.get(i);
             System.out.println((i + 1) + ". " + user.toString());
         }
-    }
 
+
+    }
+    public void makeRoom(Scanner sc, User loggedInUser, RoomService rs) {
+        System.out.println("1. 방만들기  2. 마이페이지");
+        String subMenuNumber = sc.nextLine().trim();
+        switch (subMenuNumber) {
+            case "1":
+                if (loggedInUser != null) {
+                    Room room = rs.askRoomInfo(sc, loggedInUser);
+                    MenuService menuService = new MenuService(room.getParticipantCount(), loggedInUser);
+                    menuService.proceedVote(sc);
+                    String winner = menuService.getWinner(sc);
+                    menuService.updateWinner(winner);
+                    room.setSelectedMenu(winner);
+                }
+                break;
+            case "2":
+                System.out.println("마이페이지");
+        }
+    }
+    
+    public void mainMenuSelect(Scanner sc, User user, RoomService roomService) {
+        String subNumber = sc.nextLine();
+        switch(subNumber) {
+            case "1":
+                makeRoom(sc, user, roomService);
+                break;
+            case "2":
+                System.out.println("마이페이지");
+            default:
+                System.out.println("잘못된 번호");
+        }
+    }
     /**
      * 메인 메뉴 표시 및 처리
      */
     public void showMainMenu(Scanner sc) {
         RoomService roomService = new RoomService();
-        UserManagementSystem userManagementSystem = new UserManagementSystem(sc);
         while (true) {
-            System.out.println("\n=== 회원 관리 시스템 ===");
+            System.out.println("=== 회원 관리 시스템 ===");
             System.out.println("1. 회원가입");
             System.out.println("2. 로그인");
             System.out.println("3. 등록된 회원 목록 조회");
@@ -291,30 +323,17 @@ public class UserManagementSystem {
             System.out.print("메뉴를 선택하세요: ");
 
             String choice = sc.nextLine().trim();
-
+            User user = null;
             switch (choice) {
                 case "1":
-                    registerUser();
+                    user = registerUser();
+                    makeRoom(sc, user, roomService);
+                    mainMenuSelect(sc, user, roomService);
                     break;
                 case "2":
-                    User loggedInUser = login();
-                    String subMenuNumber = sc.nextLine().trim();
-                    System.out.println("1. 방만들기  2. 마이페이지");
-                        switch (subMenuNumber) {
-                            case "1":
-                                if (loggedInUser != null) {
-                                    userManagementSystem.showMainMenu(sc);
-                                    // 방정보 묻는 로직
-                                    Room room = roomService.askRoomInfo(sc);
-                                    MenuService menuService = new MenuService(room.getParticipantCount());
-                                    menuService.proceedVote(sc);
-                                    String winner = menuService.getWinner(sc);
-                                    menuService.updateWinner(winner);
-                                    room.setSelectedMenu(winner);
-                                }
-                            case "2":
-                                System.out.println("마이페이지");
-                        }
+                    System.out.println("1. 방만들기    2. 마이페이지");
+                    String subNumber1 = sc.nextLine();
+                    mainMenuSelect(sc, user, roomService);
                     break;
                 case "3":
                     showAllUsers();

@@ -1,6 +1,7 @@
 package app.service;
 // Domain → Repository → Service
 import app.domain.Room;
+import app.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class RoomService {
         return roomList;
     }
 
-    public Room askRoomInfo(Scanner sc) {
+    public Room askRoomInfo(Scanner sc, User user) {
         System.out.print("방이름: ");
         String roomName = sc.nextLine();
         System.out.print("인원수: ");
