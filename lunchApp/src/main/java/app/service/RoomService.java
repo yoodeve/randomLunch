@@ -13,7 +13,7 @@ public class RoomService {
         return roomList;
     }
 
-    public Room askRoomInfo(Scanner sc) {
+    public static Room askRoomInfo(Scanner sc) {
         System.out.print("방이름: ");
         String roomName = sc.nextLine();
         System.out.print("인원수: ");
