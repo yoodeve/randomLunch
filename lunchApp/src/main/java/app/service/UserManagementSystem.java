@@ -308,6 +308,7 @@ public class UserManagementSystem {
                 default:
                     System.out.println("올바른 메뉴를 선택해주세요.");
             }
+            break;
         }
     }
 
@@ -370,6 +371,7 @@ public class UserManagementSystem {
 
         }
         calculateService.settleBill(sc, room);
+
     }
 
     /**

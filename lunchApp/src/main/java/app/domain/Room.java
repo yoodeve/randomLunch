@@ -1,15 +1,15 @@
 package app.domain;
 
-import app.commons.DateAt;
-import app.service.MenuService;
 
+import app.commons.DateAt;
 import java.io.Serializable;
 
 public class Room extends DateAt implements Serializable {
     private static final long serialVersionUID = 1L;
     private String roomName;
     int participantCount;
-    private String ownerName;
+    private String ownerName; // 유저 아이디 이름
+    private String accountNum;
     private int totalPrice;
     private String selectedMenu;
 
@@ -24,12 +24,12 @@ public class Room extends DateAt implements Serializable {
     @Override
     public String toString() {
         return "Room{" +
-                "roomName='" + roomName + '\'' +
-                ", participantCount='" + participantCount + '\'' +
-                ", ownerName='" + ownerName + '\'' +
-                ", totalPrice=" + totalPrice +
-                ", selectedMenu='" + selectedMenu + '\'' +
-                '}';
+            "roomName='" + roomName + '\'' +
+            ", participantCount='" + participantCount + '\'' +
+            ", ownerName='" + ownerName + '\'' +
+            ", totalPrice=" + totalPrice +
+            ", selectedMenu='" + selectedMenu + '\'' +
+            '}';
     }
 
     public String getSelectedMenu() {

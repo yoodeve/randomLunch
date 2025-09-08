@@ -8,8 +8,10 @@ public class App {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         UserManagementSystem ums = new UserManagementSystem(sc);
-        while(true){
+        int count = 0;
+        while(count < 2){
            ums.showMainMenu(sc);
+           count++;
         }
     }
 }
