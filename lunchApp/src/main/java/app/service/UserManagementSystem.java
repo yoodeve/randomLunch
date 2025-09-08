@@ -280,8 +280,6 @@ public class UserManagementSystem {
      * 메인 메뉴 표시 및 처리
      */
     public void showMainMenu(Scanner sc) {
-        RoomService roomService = new RoomService();
-        UserManagementSystem userManagementSystem = new UserManagementSystem(sc);
         while (true) {
             System.out.println("\n=== 회원 관리 시스템 ===");
             System.out.println("1. 회원가입");
@@ -297,7 +295,7 @@ public class UserManagementSystem {
                     registerUser();
                     break;
                 case "2":
-                    User loggedInUser = login();
+                    login();
                     showLoggedUserMenu(sc);
                     break;
                 case "3":
@@ -344,7 +342,7 @@ public class UserManagementSystem {
         System.out.println("3. Top 10 메뉴 리스트 랜덤 돌리기");
         System.out.print("옵션을 선택하세요: ");
         String choice = sc.nextLine().trim();
-
+        CalculateService calculateService = new CalculateService();
         MenuService menuService = new MenuService(room.getParticipantCount());
 
         switch (choice) {

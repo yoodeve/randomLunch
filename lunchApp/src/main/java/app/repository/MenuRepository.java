@@ -13,7 +13,7 @@ import java.util.*;
 // MenuRepository class의 메서드들을 사용하여 "Menu.txt" 파일에 저장되어 있는 데이터를
 // MenuRepository 객체가 instance variable로 가지고 있는 InputStream들과 OutputStream들을 통해 읽고, 덮어쓴다.
 public class MenuRepository {
-    private final String fileName = "Menu.txt"; // Menu 객체들을 ArrayList로 저장하고 있는 .txt
+    private final String fileName = "../../data/Menu.txt"; // Menu 객체들을 ArrayList로 저장하고 있는 .txt
     private static final List<Menu> defaultMenus = new ArrayList<>(Arrays.asList(new Menu("짜장면"), new Menu("짬뽕"), new Menu("탕수육"))); // default Menu 객체 ArrayList
     private FileInputStream fis;
     private BufferedInputStream bis;
