@@ -1,5 +1,7 @@
 package app.domain;
 
+import app.service.MenuService;
+
 public class Room {
     private String roomName;
     int participantCount;

@@ -14,11 +14,11 @@ public class RoomService {
     }
 
     public Room askRoomInfo(Scanner sc) {
-        System.out.println("방이름");
+        System.out.print("방이름: ");
         String roomName = sc.nextLine();
-        System.out.println("인원수");
+        System.out.print("인원수: ");
         String participantCount = sc.nextLine();
-        System.out.println("방장이름");
+        System.out.print("방장이름: ");
         String ownerName = sc.nextLine();
         return new Room(roomName, Integer.parseInt(participantCount), ownerName, 0, null);
     }
