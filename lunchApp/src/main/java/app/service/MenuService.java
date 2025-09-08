@@ -113,10 +113,6 @@ public class MenuService {
         return menuArrayList.get((int)(Math.random() * menuArrayList.size()));
    }
    public String randomFromTopList() {
-        if (getInitiatedTimes() < 5) {
-            System.out.println("아직 충분히 데이터가 모이지 않았습니다.");
-            return null;
-        }
         List<Menu> loadedMenuList = this.menuRepository.loadMenus();
         int topListedMenuIndex = loadedMenuList.size() - 1;
         List<String> topList = new ArrayList<>(2);

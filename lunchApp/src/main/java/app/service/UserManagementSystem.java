@@ -317,10 +317,11 @@ public class UserManagementSystem {
         System.out.println("2. 마이페이지 조회하기");
         System.out.print("메뉴를 선택하세요: ");
         String choice = sc.nextLine().trim();
+        RoomService rs = new RoomService();
 
         switch (choice) {
             case "1":
-                Room room = RoomService.askRoomInfo(sc);
+                Room room = rs.askRoomInfo(sc);
                 showMenuService(room, sc);
 
                 break;
@@ -368,6 +369,7 @@ public class UserManagementSystem {
                 System.out.println("없는 옵션입니다.");
 
         }
+        calculateService.settleBill(sc, room);
     }
 
     /**
