@@ -8,11 +8,6 @@ class UserManagementMain {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        UserManagementSystem system = new UserManagementSystem(sc);
-        try {
-            system.showMainMenu(sc);
-        } finally {
-            system.closeScanner();
-        }
+
     }
 }

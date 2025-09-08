@@ -1,6 +1,7 @@
 package app.service;
 
 import app.commons.Regex;
+import app.domain.Room;
 import app.domain.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -279,6 +280,8 @@ public class UserManagementSystem {
      * 메인 메뉴 표시 및 처리
      */
     public void showMainMenu(Scanner sc) {
+        RoomService roomService = new RoomService();
+        UserManagementSystem userManagementSystem = new UserManagementSystem(sc);
         while (true) {
             System.out.println("\n=== 회원 관리 시스템 ===");
             System.out.println("1. 회원가입");
@@ -295,15 +298,30 @@ public class UserManagementSystem {
                     break;
                 case "2":
                     User loggedInUser = login();
-                    if (loggedInUser != null) {
-                        // 로그인 성공 후 추가 기능을 여기에 구현할 수 있습니다.
-                    }
+                    String subMenuNumber = sc.nextLine().trim();
+                    System.out.println("1. 방만들기  2. 마이페이지");
+                        switch (subMenuNumber) {
+                            case "1":
+                                if (loggedInUser != null) {
+                                    userManagementSystem.showMainMenu(sc);
+                                    // 방정보 묻는 로직
+                                    Room room = roomService.askRoomInfo(sc);
+                                    MenuService menuService = new MenuService(room.getParticipantCount());
+                                    menuService.proceedVote(sc);
+                                    String winner = menuService.getWinner(sc);
+                                    menuService.updateWinner(winner);
+                                    room.setSelectedMenu(winner);
+                                }
+                            case "2":
+                                System.out.println("마이페이지");
+                        }
                     break;
                 case "3":
                     showAllUsers();
-                    break;
+                    return;
                 case "4":
                     System.out.println("프로그램을 종료합니다.");
+                    System.exit(0);
                     return;
                 default:
                     System.out.println("올바른 메뉴를 선택해주세요.");

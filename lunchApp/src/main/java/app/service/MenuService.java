@@ -12,12 +12,6 @@ public class MenuService {
     Map<String, Integer> menuList = new HashMap<>(); // 해당 방의 투표들을 메뉴이름(String) 별로 저장하기 위한 HashMap
     MenuRepository menuRepository = new MenuRepository(); // "Menu.txt" 파일 사용하기 위해
 
-    /*
-    @todo
-    중요한코드는 위로... 멤버필드-no생성자-all생성자-함수-getter/setter순으로 정렬하는게 일반적인 컨벤션
-    https://nooblette.tistory.com/entry/%EB%A9%94%EC%84%9C%EB%93%9C-%EB%B0%8F-%ED%95%84%EB%93%9C-%EC%84%A0%EC%96%B8-%EC%88%9C%EC%84%9C-%EC%BB%A8%EB%B2%A4%EC%85%98-%EC%9E%90%EB%B0%94
-    참조
-     */
     // default 생성자 호출을 제어하고 해당 클래스의 객체를 생성할 때,
     // 방의 인원 수를 parameter로 넣는 것을 강제시키기 위해 해당 생성자를 정의한다.
     public MenuService(int numOfUsers) {
@@ -113,7 +107,8 @@ public class MenuService {
         return count;
    }
 
-   public String randomMenu(){
+   public String randomMenu(Scanner sc) {
+        proceedVote(sc);
         List<String> menuArrayList = new ArrayList<>(this.menuList.keySet());
         return menuArrayList.get((int)(Math.random() * menuArrayList.size()));
    }
