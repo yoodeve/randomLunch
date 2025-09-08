@@ -27,7 +27,7 @@ public class Regex {
 
     // 한 번에 모든 규칙을 검사
     private static final Pattern COMPLETE_PATTERN_PW = Pattern.compile(
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{}|;:,.<>?])(?!.*\\s).{6,12}$"
+            "^(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{}|;:,.<>?])(?!.*\\s).{6,12}$"
     );
 
     // 한글 이름 완전 검증 패턴
@@ -109,10 +109,7 @@ public class Regex {
      * @param id 검사할 아이디
      * @return 유효하면 true, 그렇지 않으면 false
      */
-    public static boolean isValidId(String id) {
-        if (id == null || id.trim().isEmpty()) {
-            return false;
-        }
+    public boolean isValidId(String id) {
         return COMPLETE_PATTERN_ID.matcher(id.trim()).matches();
     }
 }

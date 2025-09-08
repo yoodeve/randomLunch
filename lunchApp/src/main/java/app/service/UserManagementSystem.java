@@ -11,19 +11,19 @@ import java.util.Scanner;
  */
 public class UserManagementSystem {
     private List<User> users;
-    private SecurePasswordFileStorage passwordStorage;
+    private SecurePasswordFileStorage passwordStorage = new SecurePasswordFileStorage();;
     private Regex regex = new Regex();
     private Scanner scanner;
 
     /**
      * UserManagementSystem 생성자
      */
-    public UserManagementSystem() {
+    public UserManagementSystem(Scanner sc) {
         this.users = new ArrayList<>(); // 먼저 초기화
-
+        this.scanner = sc;
         if (!users.isEmpty()) {
             User user = users.get(users.size() - 1);
-            this.passwordStorage = new SecurePasswordFileStorage(user.getId(), user.getPassword());
+//            this.passwordStorage = new SecurePasswordFileStorage(user.getId(), user.getPassword());
         }
 //        else {
 //            // 비어있을 때 처리
@@ -103,13 +103,18 @@ public class UserManagementSystem {
 
    //유효한 아이디 입력받는 메서드
     private String getValidId() {
-        String id;
+        String id = "";
         while (true) {
             System.out.print("아이디를 입력하세요 (영문, 숫자 조합 3자리 이상): ");
             id = scanner.nextLine().trim();
 
             if (id.isEmpty()) {
                 System.out.println("아이디는 필수 입력사항입니다.");
+                continue;
+            }
+
+            if(!regex.isValidId(id)) {
+                System.out.println("올바른 아이디를 입력해주세요");
                 continue;
             }
 
@@ -218,13 +223,12 @@ public class UserManagementSystem {
 
             if (id.isEmpty()) {
                 System.out.println("아이디를 입력해주세요.");
-                continue;
             }
-
-            if (!Regex.isValidId(id)) {
+            if (!regex.isValidId(id)) {
                 System.out.println("올바른 형식의 아이디를 입력해주세요.");
                 continue;
             }
+
             break;
         }
         return id;
@@ -274,7 +278,7 @@ public class UserManagementSystem {
     /**
      * 메인 메뉴 표시 및 처리
      */
-    public void showMainMenu() {
+    public void showMainMenu(Scanner sc) {
         while (true) {
             System.out.println("\n=== 회원 관리 시스템 ===");
             System.out.println("1. 회원가입");
@@ -283,7 +287,7 @@ public class UserManagementSystem {
             System.out.println("4. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
-            String choice = scanner.nextLine().trim();
+            String choice = sc.nextLine().trim();
 
             switch (choice) {
                 case "1":

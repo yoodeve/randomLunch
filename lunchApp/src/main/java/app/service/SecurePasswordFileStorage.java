@@ -19,9 +19,8 @@ public class SecurePasswordFileStorage {
      * SecurePasswordFileStorage 생성자
      * 기존 파일에서 비밀번호 정보를 로드합니다.
      */
-    public SecurePasswordFileStorage(String id, String pw) {
+    public SecurePasswordFileStorage() {
         this.passwordMap = new HashMap<>();
-        loadPasswordsFromFile(id, this.passwordMap.get(pw));
     }
 
     /**
@@ -89,11 +88,21 @@ public class SecurePasswordFileStorage {
 //        }
 //    }
 
+//    public void loadPasswordsFromFile(String userId, String password) {
+//        String encryptedPassword = encryptPassword(password);
+//        Map<String, String> newMap = new HashMap<>(passwordMap);
+//        newMap.put(userId, encryptedPassword);
+////        passwordMap = Collections.unmodifiableMap(newMap);
+//        passwordMap =  new HashMap<>(passwordMap);
+//        savePasswordsToFile();
+//    }
     public void loadPasswordsFromFile(String userId, String password) {
+        if (password == null) {
+            System.out.println("경고: password가 null입니다. 저장하지 않습니다.");
+            return;
+        }
         String encryptedPassword = encryptPassword(password);
-        Map<String, String> newMap = new HashMap<>(passwordMap);
-        newMap.put(userId, encryptedPassword);
-        passwordMap = Collections.unmodifiableMap(newMap);
+        passwordMap.put(userId, encryptedPassword);
         savePasswordsToFile();
     }
 
