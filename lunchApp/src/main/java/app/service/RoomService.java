@@ -25,10 +25,6 @@ public class RoomService {
         String ownerName = sc.nextLine();
         Room room = new Room(roomName, Integer.parseInt(participantCount), ownerName, 0, null);
         roomRepository.saveRoom(room);
-        List<Room> newRoom =  roomRepository.getRooms();
-        for(Room r : newRoom) {
-            System.out.println(r.getRoomName());
-        }
         return new Room(roomName, Integer.parseInt(participantCount), ownerName, 0, null);
     }
 }
