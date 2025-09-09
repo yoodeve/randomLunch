@@ -19,16 +19,11 @@ public class MenuService {
     }
 
     // 방 인원 수 만큼 voteMenu() 함수를 진행시킨다.
-    /*
-    @todo
-    굳이 함수로 뺄 이유가.. 걍 voteMenu에서 for문 돌리는게 더 깔끔할거같은데
-     */
     public void proceedVote(Scanner sc) {
         for (int i = 0; i < numOfUsers; i++) {
             voteMenu(i, sc);
         }
     }
-
     // 투표 입력을 받아 HashMap인 menuList에 저장
     private void voteMenu(int i, Scanner sc) {
         System.out.print((i + 1) + "번째 친구가 먹고싶은 메뉴를 투표해주세요.==>");
@@ -73,7 +68,7 @@ public class MenuService {
    public String getWinner(Scanner sc) {
         List<String> Winners = getAllWinners();
         if (Winners.size() > 1) {
-            System.out.println("어라..?");
+            System.out.println("어라..? 투표 수가 같습니다. 재투표를 진행합니다. 한 번 더!");
             menuList.clear();
             proceedVote(sc);
             return getWinner(sc);

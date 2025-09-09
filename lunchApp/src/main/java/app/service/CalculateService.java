@@ -81,8 +81,9 @@ public class CalculateService {
         if (calculate.getKingNum() == null) {
             System.out.println("1인당 금액은 " + NPrice + "원입니다.");
         } else {
-            System.out.println(calculate.getKingNum() + "번이"+ calculate.getKingPrice() +"원이고 나머지 분은 1인당 금액은 " + NPrice + "원입니다." + "남은 인원 " + calculate.getPersonCount());
+            System.out.println(calculate.getKingNum() + "번이"+ calculate.getKingPrice() +"원이고 나머지 분은 1인당 금액은 " + NPrice + "원입니다." + " 남은 인원 " + calculate.getPersonCount());
         }
+        System.out.println("   🎉 이용해주셔서 감사합니다! 🎉   ");
         roomRepository.saveRoom(newRoom);
     }
 
