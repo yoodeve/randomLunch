@@ -72,19 +72,19 @@
 
 ## 🎬 시연
 <img width="738" height="452" alt="1번" src="https://github.com/user-attachments/assets/45904cdd-9964-4824-88a6-4a3fbdda656e" /><br />
-회원가입<br />
+<i>회원가입</i><br />
 <img width="328" height="437" alt="2번" src="https://github.com/user-attachments/assets/d6072e4c-ca1a-4396-8e59-a91712308ee0" /><br />
-로그인<br />
+<i>로그인</i><br />
 <img width="383" height="325" alt="3번" src="https://github.com/user-attachments/assets/83b01b8a-b13d-4de5-a159-0d5f1026ab26" /><br />
-방 정보 입력(방 만들기)<br />
+<i>방 정보 입력(방 만들기)</i><br />
 <img width="451" height="546" alt="4번" src="https://github.com/user-attachments/assets/8539d522-807c-4599-ae10-aaffd5e82e5f" /><br />
-메뉴 투표하기<br />
+<i>메뉴 투표하기</i><br />
 <img width="788" height="610" alt="5번" src="https://github.com/user-attachments/assets/b0449aad-88fa-4861-9354-86e477431e8e" /><br />
-입력받은 메뉴로 랜덤메뉴 선정<br />
+<i>입력받은 메뉴로 랜덤메뉴 선정</i><br />
 <img width="491" height="380" alt="6번" src="https://github.com/user-attachments/assets/3065a305-3c3b-4739-a44d-4efe129f98c0" /><br />
-인기메뉴 중 랜덤메뉴 선정<br />
+<i>인기메뉴 중 랜덤메뉴 선정</i><br />
 <img width="646" height="368" alt="7번" src="https://github.com/user-attachments/assets/94373380-71a2-4d06-bdc0-0eaecd01ed03" /><br />
-정산하기와 흑기사 기능<br />
+<i>정산하기와 흑기사 기능</i>
 
 
 ---
